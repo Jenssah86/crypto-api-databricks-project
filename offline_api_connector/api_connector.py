@@ -2,6 +2,7 @@
 
 # Deze code haalt de prijzen van een aantal cryptocurrencies op van de CoinGecko API en slaat deze op in een CSV bestand, 
 # zodat we offline kunnen werken.
+
 import requests
 import pandas as pd
 from datetime import datetime, timezone
@@ -18,16 +19,17 @@ all_rows = []
 # die we later omzetten naar een DataFrame en opslaan als CSV.
 for coin in coins:
     print("Fetching:", coin)
-    url = f"{BASE_URL}/coins/{coin}/market_chart?vs_currency=eur&days=90"
+    url = f"{BASE_URL}/coins/{coin}/market_chart?vs_currency=eur&days=90" # Endpoint van de CoinGecko API om de prijzen van de afgelopen 90 dagen op te halen.
     resp = requests.get(url)
     data = resp.json()
 
     for p in data["prices"]:
+        dt = datetime.fromtimestamp(p[0] / 1000, tz=timezone.utc) # We zetten de timestamp om naar een datetime object in UTC tijdzone.
+        
         all_rows.append({
             "coin_id": coin,
-            "price_timestamp": datetime.fromtimestamp(p[0] / 1000, tz=timezone.utc),
-            "price": p[1],
-            "timestamp": datetime.now(timezone.utc)
+            "price_timestamp": dt.replace(minute=0, second=0, microsecond=0),
+            "price": p[1]
         })
 
 # We zetten de lijst van dictionaries om naar een DataFrame en slaan deze op als CSV bestand.
