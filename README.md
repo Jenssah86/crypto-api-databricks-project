@@ -4,7 +4,7 @@ Dataproject in Databricks with API datasource
 
 
 
-!\[afbeelding](./images/1.png)
+![afbeelding](./images/1.png)
 
 
 
