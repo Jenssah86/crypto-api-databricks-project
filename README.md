@@ -6,6 +6,7 @@ Dataproject in Databricks with API datasource
 
 ![afbeelding](./images/1.png)
 
+![afbeelding](./images/2.png)
 
 
 Voor dit project heb ik een complete end‑to‑end data‑engineering oplossing ontworpen en gebouwd in Databricks Community Edition,
